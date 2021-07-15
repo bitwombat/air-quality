@@ -34,3 +34,8 @@ oneLineDecoder =
 measurementDecoder : Decoder (List Measurement)
 measurementDecoder =
     path [ "category", "region", "station", "measurement" ] (list oneLineDecoder)
+
+
+measurementSingleDecoder : Decoder Measurement
+measurementSingleDecoder =
+    path [ "category", "region", "station", "measurement" ] (single oneLineDecoder)
