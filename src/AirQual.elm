@@ -14,17 +14,14 @@ import Xml.Decode exposing (..)
 --
 -- type alias Station =
 --     { name : String, index : Float }
+-- type alias Measurements =
+--     List Measurement
 
 
 type alias Measurement =
     { rating_name : String
     , measurement : Float
     }
-
-
-
--- type alias Measurements =
---     List Measurement
 
 
 oneLineDecoder : Decoder Measurement
