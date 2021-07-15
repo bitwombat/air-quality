@@ -24,12 +24,11 @@ suite =
                     </category>
                 </airdata>
                 """
-                    |> decodeString dataDecoder
+                    |> decodeString measurementDecoder
                     |> Expect.equal
-                        [ Ok
-                            { rating_name = "Very Good", measurement = 15 }
-                        , ( Ok
-                          , { rating_name = "Very Good", measurement = 4.9 }
-                          )
-                        ]
+                        (Ok
+                            [ { rating_name = "Very Good", measurement = 15 }
+                            , { rating_name = "Very Good", measurement = 4.9 }
+                            ]
+                        )
         ]

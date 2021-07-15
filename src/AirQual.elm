@@ -16,7 +16,7 @@ import Xml.Decode exposing (..)
 --     { name : String, index : Float }
 
 
-type alias Data =
+type alias Measurement =
     { rating_name : String
     , measurement : Float
     }
@@ -24,11 +24,16 @@ type alias Data =
 
 
 -- type alias Measurements =
---     List Data
+--     List Measurement
 
 
-dataDecoder : Decoder Data
-dataDecoder =
-    map2 (::)
-        (path [ "category", "region", "station", "measurement" ] (single <| stringAttr "rating_name"))
-        (path [ "category", "region", "station", "measurement" ] (single float))
+oneLineDecoder : Decoder Measurement
+oneLineDecoder =
+    map2 Measurement
+        (path [ "measurement" ] (single <| stringAttr "rating_name"))
+        (path [ "measurement" ] (single float))
+
+
+measurementDecoder : Decoder (List Measurement)
+measurementDecoder =
+    path [ "category", "region", "station" ] (list oneLineDecoder)
