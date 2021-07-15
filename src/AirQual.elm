@@ -27,10 +27,10 @@ type alias Measurement =
 oneLineDecoder : Decoder Measurement
 oneLineDecoder =
     map2 Measurement
-        (path [ "measurement" ] (single <| stringAttr "rating_name"))
-        (path [ "measurement" ] (single float))
+        (stringAttr "rating_name")
+        float
 
 
 measurementDecoder : Decoder (List Measurement)
 measurementDecoder =
-    path [ "category", "region", "station" ] (list oneLineDecoder)
+    path [ "category", "region", "station", "measurement" ] (list oneLineDecoder)
