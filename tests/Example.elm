@@ -11,24 +11,14 @@ suite : Test
 suite =
     describe "Basic XML decode"
         [ describe "fixed data"
-            [ test "really don't have much to say" <|
+            [ test "Measurement node decode" <|
                 \_ ->
                     """
-    <root>
-        <path>
-            <to>
-                <string>
-                    <value>SomeString</value>
-                </string>
-                <int>
-                    <values>1</values>
-                    <values>2</values>
-                </int>
-            </to>
-        </path>
-    </root>
-    """
+                    <root>
+                        <measurement name="Particle PM10" rating_name="Very Good" rating="1" index="18.8">9.4</measurement>
+                    </root>
+                    """
                         |> decodeString dataDecoder
-                        |> Expect.equal (Ok { string = "SomeString", integers = [ 1, 2 ] })
+                        |> Expect.equal (Ok { rating_name = "Very Good", measurement = 9.4 })
             ]
         ]

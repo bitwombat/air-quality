@@ -16,13 +16,13 @@ type alias Station =
 
 
 type alias Data =
-    { string : String
-    , integers : List Int
+    { rating_name : String
+    , measurement : Float
     }
 
 
 dataDecoder : Decoder Data
 dataDecoder =
     map2 Data
-        (path [ "path", "to", "string", "value" ] (single string))
-        (path [ "path", "to", "int", "values" ] (list int))
+        (path [ "measurement" ] (single <| stringAttr "rating_name"))
+        (path [ "measurement" ] (single float))
